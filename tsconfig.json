@@ -1,3 +1,20 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "exclude": [
+	"node_modules",
+	"typings",
+	"babel.config.js",
+	"metro.config.js",
+	"jest.config.js",
+	"jest.setup.js",
+	"jest.setup.ts",
+	"jest.setup.tsx",
+	"jest.setup.babel.js",
+	"jest.setup.babel.ts",
+	"jest.setup.babel.tsx",
+	"jest.setup.mjs",
+	"jest.setup.cjs",
+	"jest.setup.esm.js",
+	"jest.setup.esm.ts"
+  ]
 }
