@@ -5,7 +5,6 @@ import {
   Section,
 } from '../components/Components';
 import {
-  ImageProps,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -18,9 +17,6 @@ import ItemCard from '../components/ItemCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
-  const images = {
-    itemPlaceholder: require('../assets/item-placeholder.png'),
-  };
 
   // Initial state
   const [data, setData] = useState(require('../assets/dummydata.json'));
@@ -29,13 +25,18 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   );
   const [lang, setLang] = useState('en');
   const [mode, setMode] = useState('dark');
-  const endpoint = 'http://localhost:3000/num';
+  const endpoint = 'https://cloud.raymond.li/proj/';
 
   useEffect(() => {
-    fetch('https://cloud.raymond.li/projdata.json').then(response => {
+    fetch(endpoint + 'data.json').then(response => {
       response.json().then(res => {
         setData(res);
-        setItems(res.items);
+
+        // Add image to items
+        setItems(res.items.map((item: Item) => {
+          item.imgURL = endpoint + 'img/' + item.id + '.jpg';
+          return item;
+        }));
       });
     });
     try {
@@ -110,10 +111,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   }/*, [myNumbers, numbersWasEmpty]*/);
 
   const showItemHandler = (
-    img: ImageProps,
+    img: string,
     title: string | null,
+    width: number,
+    height: number,
   ) => {
-    navigation.navigate('Result', { img, title });
+    navigation.navigate('Result', { img, title, width, height });
   };
 
   const searchChangedHandler = (search: string) => {
@@ -132,8 +135,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={Styles.screen.container}>
-      {/* Scrollable page  */}
-      <ScrollView style={Styles.page.container}>
+      {/* Page  */}
+      <View style={Styles.page.container}>
         {/* Search bar */}
         <View style={Styles.search.container}>
           <TextInput
@@ -154,8 +157,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 items.map(item => (
                   <ItemCard
                     key={item.id}
-                    img={item.img ? item.img : images.itemPlaceholder}
+                    imgURL={item.imgURL ? item.imgURL : endpoint + 'item-placeholder.png'}
                     title={item.title}
+                    width={item.width ? item.width : 200}
+                    height={item.height ? item.height : 200}
                     showItem={showItemHandler}
                   />
                 ))
@@ -165,7 +170,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             </View>
           </ScrollView>
         </Section>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

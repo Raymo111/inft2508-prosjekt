@@ -6,7 +6,7 @@ import {
   Section,
   SectionHeading,
 } from '../components/Components';
-import { ImageProps, SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { Styles } from '../components/Styles';
 import ItemCard from '../components/ItemCard';
 
@@ -39,12 +39,10 @@ const ResultsScreen = ({ navigation }: { navigation: any }) => {
   }, []);
 
   const showResultsHandler = (
-    img: ImageProps,
-    highlight: string | null,
-    label: string | null,
-    numbers: string | null,
+    imgURL: string,
+    title: string | null,
   ) => {
-    navigation.navigate('Result', { img, highlight, label, numbers });
+    navigation.navigate('Result', { imgURL, title });
   };
 
   return (
@@ -58,20 +56,18 @@ const ResultsScreen = ({ navigation }: { navigation: any }) => {
             <H3>{dateToday}</H3>
           </SectionHeading>
           <ScrollView>
-            {resultsToday.length > 0 ? (
-              resultsToday.map(result => (
-                <ItemCard
-                  key={result.id}
-                  img={result.img ? result.img : images.resultPlaceholder}
-                  highlight={result.highlight}
-                  label={result.label}
-                  numbers={result.numbers}
-                  showItem={showResultsHandler}
-                />
-              ))
-            ) : (
-              <H3>No results found</H3>
-            )}
+            {/*{resultsToday.length > 0 ? (*/}
+            {/*  resultsToday.map(result => (*/}
+            {/*    <ItemCard*/}
+            {/*      key={result.id}*/}
+            {/*      imgURL={result.imgURL ? result.imgURL : images.resultPlaceholder}*/}
+            {/*      title={result.title}*/}
+            {/*      showItem={showResultsHandler}*/}
+            {/*    />*/}
+            {/*  ))*/}
+            {/*) : (*/}
+            {/*  <H3>No results found</H3>*/}
+            {/*)}*/}
           </ScrollView>
         </Section>
         {/*  Previous lottery results */}
@@ -80,20 +76,18 @@ const ResultsScreen = ({ navigation }: { navigation: any }) => {
             <H1>Previous Lottery Results</H1>
           </SectionHeading>
           <ScrollView>
-            {resultsPrevious.length > 0 ? (
-              resultsPrevious.map(result => (
-                <ItemCard
-                  key={result.id}
-                  img={result.img ? result.img : images.resultPlaceholder}
-                  highlight={result.highlight}
-                  label={result.label}
-                  numbers={result.numbers}
-                  showItem={showResultsHandler}
-                />
-              ))
-            ) : (
-              <H3>No results found</H3>
-            )}
+            {/*{resultsPrevious.length > 0 ? (*/}
+            {/*  resultsPrevious.map(result => (*/}
+            {/*    <ItemCard*/}
+            {/*      key={result.id}*/}
+            {/*      imgURL={result.imgURL ? result.imgURL : images.resultPlaceholder}*/}
+            {/*      title={result.title}*/}
+            {/*      showItem={showResultsHandler}*/}
+            {/*    />*/}
+            {/*  ))*/}
+            {/*) : (*/}
+            {/*  <H3>No results found</H3>*/}
+            {/*)}*/}
           </ScrollView>
         </Section>
       </ScrollView>

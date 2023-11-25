@@ -1,6 +1,5 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Logo } from '../components/Components';
 import BookmarkScreen from './Result';
 import BookmarksScreen from './Results';
 
@@ -23,10 +22,6 @@ const BookmarksTabScreen = () => {
       <BookmarksStack.Screen
         name="Results"
         component={BookmarksScreen}
-        options={() => ({
-          // eslint-disable-next-line react/no-unstable-nested-components
-          headerRight: () => <Logo />,
-        })}
       />
       <BookmarksStack.Screen name="Bookmarks" component={BookmarkScreen} />
     </BookmarksStack.Navigator>

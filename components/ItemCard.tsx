@@ -1,26 +1,31 @@
-import { Image, ImageProps, Pressable, Text } from 'react-native';
-import React from 'react';
+import { Image, Pressable, Text } from 'react-native';
 import { Styles } from './Styles';
 
 const ItemCard = (props: {
-  img: ImageProps;
+  imgURL: string;
   title: string | null;
+  width: number;
+  height: number;
   showItem: (
-    img: ImageProps,
+    img: string,
     title: string | null,
+    width: number,
+    height: number,
   ) => void;
 }) => {
   const handlePress = () => {
     props.showItem(
-      props.img,
+      props.imgURL,
       props.title,
+      props.width,
+      props.height,
     );
   };
   return (
-    <Pressable style={Styles.card.container} onPress={handlePress}>
-      <Image source={props.img} style={Styles.card.image} />
-      <Text style={Styles.card.title}>{props.title}</Text>
-    </Pressable>
+      <Pressable style={Styles.card.container} onPress={handlePress}>
+        <Image source={{uri: props.imgURL}} style={Styles.card.image} height={200} width={props.height / props.width * 200} />
+        <Text style={Styles.card.title}>{props.title}</Text>
+      </Pressable>
   );
 };
 

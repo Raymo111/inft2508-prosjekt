@@ -4,28 +4,18 @@ import React from 'react';
 
 export class Item {
   id: number | null = null;
-  img: string | null = null;
+  imgURL: string | null = null;
   title: string | null = null;
+  width: number | null = null;
+  height: number | null = null;
 }
 
 export class News {
   id: number | null = null;
-  img: string | null = null;
-  title: string | null = null;
   date: string | null = null;
   source: string | null = null;
   text: string | null = null;
 }
-
-export const Logo = (props: any) => {
-  return (
-    <Image
-      source={require('../assets/logo.png')}
-      style={Styles.header.icon}
-      {...props}
-    />
-  );
-};
 
 export const Section = (props: { children: any }) => {
   return <View style={Styles.section.container}>{props.children}</View>;
