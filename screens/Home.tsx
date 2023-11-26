@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   H3,
   Item,
@@ -11,21 +11,24 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { Styles } from '../components/Styles';
+import {Styles} from '../components/Styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ItemCard from '../components/ItemCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFocusEffect} from "@react-navigation/native";
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
+export const endpoint = 'https://cloud.raymond.li/proj/';
+
+const HomeScreen = ({navigation}: { navigation: any }) => {
 
   // Initial state
   const [data, setData] = useState(require('../assets/dummydata.json'));
-  const [items, setItems] = useState<Item[]>(
-    data.items,
-  );
+  const [items, setItems] = useState<Item[]>(data.items);
+  const [searchedItems, setSearchedItems] = useState<Item[]>([]);
+  const [filters, setFilters] = useState<string>("");
   const [lang, setLang] = useState('en');
   const [mode, setMode] = useState('dark');
-  const endpoint = 'https://cloud.raymond.li/proj/';
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetch(endpoint + 'data.json').then(response => {
@@ -34,92 +37,52 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
         // Add image to items
         setItems(res.items.map((item: Item) => {
-          item.imgURL = endpoint + 'img/' + item.id + '.jpg';
+          if (item.images && item.images.length > 0) {
+            item.images[0].url = endpoint + 'img/' + item.id + '/1.jpg';
+          }
           return item;
         }));
       });
     });
+  }, []);
+
+  useFocusEffect(() => {
     try {
+      AsyncStorage.getItem('filters').then(value => {
+        if (value !== null && filters != value) {
+          setFilters(value);
+        }
+      });
       AsyncStorage.getItem('lang').then(value => {
-        if (value !== null) {
+        if (value !== null && lang != value) {
           setLang(value);
         }
       });
       AsyncStorage.getItem('mode').then(value => {
-        if (value !== null) {
+        if (value !== null && mode != value) {
           setMode(value);
         }
       });
     } catch (e) {
       console.log('Error');
     }
-  }, []);
+  });
 
   useEffect(() => {
-    try {
-      // Persist to storage
-      AsyncStorage.setItem('lang', lang).then(r => {
-        console.log(r);
-      });
-
-      // Send to server
-    //   if (myNumbers.trim().length === 0) {
-    //     // DELETE when empty
-    //     fetch(endpoint, {
-    //       method: 'DELETE',
-    //     }).then(response => {
-    //       response.json().then(res => {
-    //         console.log(res);
-    //       });
-    //     });
-    //   } else if (numbersWasEmpty) {
-    //     // POST when was empty
-    //     fetch(endpoint, {
-    //       method: 'POST',
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         numbers: myNumbers,
-    //       }),
-    //     }).then(response => {
-    //       response.json().then(res => {
-    //         console.log(res);
-    //       });
-    //     });
-    //   } else {
-    //     // PUT when not empty
-    //     fetch(endpoint, {
-    //       method: 'PUT',
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         numbers: myNumbers,
-    //       }),
-    //     }).then(response => {
-    //       response.json().then(res => {
-    //         console.log(res);
-    //       });
-    //     });
-    //   }
-    } catch (e) {
-      console.log('Error');
+    if (filters.trim().length > 0) {
+      let f: Record<string, boolean> = JSON.parse(filters);
+      setItems(data.items.filter((item: Item) => {
+        return f[item.category ?? ''] && f[item.location ?? ''];
+      }));
     }
-  }/*, [myNumbers, numbersWasEmpty]*/);
+  }, [filters]);
 
-  const showItemHandler = (
-    img: string,
-    title: string | null,
-    width: number,
-    height: number,
-  ) => {
-    navigation.navigate('Result', { img, title, width, height });
-  };
+  useEffect(() => {
+    searchChangedHandler(search); // works
+  }, [items]);
 
   const searchChangedHandler = (search: string) => {
+    setSearch(search);
     const matchedItems: Item[] = [];
     if (search.trim().length > 0) {
       items.map(value => {
@@ -127,10 +90,19 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           matchedItems.push(value);
         }
       });
-      setItems(matchedItems);
+      setSearchedItems(matchedItems); // Set the filtered items
     } else {
-      setItems(data.items);
+      setSearchedItems(items); // Reset filtered items to original items
     }
+  };
+
+  const showItemHandler = (
+    img: string,
+    title: string | null,
+    width: number,
+    height: number,
+  ) => {
+    navigation.navigate('Result', {img, title, width, height});
   };
 
   return (
@@ -146,21 +118,21 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             onChangeText={searchChangedHandler}
           />
           <Pressable style={Styles.search.button}>
-            <MaterialIcons name="search" size={24} color="grey" />
+            <MaterialIcons name="search" size={24} color="grey"/>
           </Pressable>
         </View>
         {/* Items */}
         <Section>
           <ScrollView>
-            <View style={Styles.flexwrapCard.container}>
-              {items.length > 0 ? (
-                items.map(item => (
+            <View style={Styles.card.container}>
+              {searchedItems.length > 0 ? (
+                searchedItems.map(item => (
                   <ItemCard
                     key={item.id}
-                    imgURL={item.imgURL ? item.imgURL : endpoint + 'item-placeholder.png'}
+                    imgURL={item.images ? item.images[0].url : endpoint + 'item-placeholder.png'}
                     title={item.title}
-                    width={item.width ? item.width : 200}
-                    height={item.height ? item.height : 200}
+                    width={item.images ? item.images[0].width : 200}
+                    height={item.images ? item.images[0].height : 200}
                     showItem={showItemHandler}
                   />
                 ))

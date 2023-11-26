@@ -1,13 +1,17 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './Home';
-import ResultScreen from './Result';
-import NewsStoryScreen from './NewsStory';
+import FiltersScreen from './Filters';
+import NewsStoryScreen from './Cart';
 import React from 'react';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {Pressable} from "react-native";
 
 const HomeStack = createNativeStackNavigator();
 
-const HomeTabScreen = () => {
+const HomeTabScreen = ({navigation}: { navigation: any }) => {
+  const handleFiltersPress = () => {
+    navigation.navigate('Filters');
+  };
   return (
     <HomeStack.Navigator
       initialRouteName="Home"
@@ -26,11 +30,11 @@ const HomeTabScreen = () => {
         component={HomeScreen}
         options={() => ({
           // eslint-disable-next-line react/no-unstable-nested-components
-          headerRight: () => <MaterialIcons name="menu" size={24} color="grey" />,
+          headerRight: () => <Pressable onPress={handleFiltersPress}><MaterialIcons name="menu" size={24} color="grey"/></Pressable>,
         })}
       />
-      <HomeStack.Screen name="Result" component={ResultScreen} />
-      <HomeStack.Screen name="NewsStory" component={NewsStoryScreen} />
+      <HomeStack.Screen name="Filters" component={FiltersScreen}/>
+      <HomeStack.Screen name="NewsStory" component={NewsStoryScreen}/>
     </HomeStack.Navigator>
   );
 };

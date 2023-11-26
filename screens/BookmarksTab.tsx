@@ -1,6 +1,6 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BookmarkScreen from './Result';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import BookmarkScreen from './Filters';
 import BookmarksScreen from './Results';
 
 const BookmarksStack = createNativeStackNavigator();
@@ -23,7 +23,7 @@ const BookmarksTabScreen = () => {
         name="Results"
         component={BookmarksScreen}
       />
-      <BookmarksStack.Screen name="Bookmarks" component={BookmarkScreen} />
+      <BookmarksStack.Screen name="Bookmarks" component={BookmarkScreen}/>
     </BookmarksStack.Navigator>
   );
 };

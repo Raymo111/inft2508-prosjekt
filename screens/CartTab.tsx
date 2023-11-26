@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NewsStoryScreen from './NewsStory';
+import CartScreen from './Cart';
 import React from 'react';
-import SettingsScreen from './News';
+import SettingsScreen from './Settings';
 
-const NewsStack = createNativeStackNavigator();
+const CartStack = createNativeStackNavigator();
 
 const SettingsTabScreen = () => {
   return (
-    <NewsStack.Navigator
+    <CartStack.Navigator
       initialRouteName="News"
       screenOptions={{
         headerStyle: {
@@ -19,12 +19,12 @@ const SettingsTabScreen = () => {
           color: 'white',
         },
       }}>
-      <NewsStack.Screen
+      <CartStack.Screen
         name="News"
         component={SettingsScreen}
       />
-      <NewsStack.Screen name="NewsStory" component={NewsStoryScreen} />
-    </NewsStack.Navigator>
+      <CartStack.Screen name="NewsStory" component={CartScreen} />
+    </CartStack.Navigator>
   );
 };
 

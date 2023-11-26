@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const Styles = {
   screen: StyleSheet.create({
@@ -70,16 +70,14 @@ export const Styles = {
       marginBottom: 12,
     },
   }),
-  flexwrapCard: StyleSheet.create({
+  card: StyleSheet.create({
     container: {
       marginTop: 16,
       marginBottom: 16,
       flexDirection: 'row',
       flexWrap: 'wrap',
     },
-  }),
-  card: StyleSheet.create({
-    container: {
+    card: {
       marginRight: 8,
       marginBottom: 8,
     },
@@ -91,6 +89,22 @@ export const Styles = {
       color: '#FFF',
       marginTop: 4,
       marginBottom: 4,
+    },
+  }),
+  checklist: StyleSheet.create({
+    container: {
+      marginTop: 16,
+      marginBottom: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    checkbox: {
+      color: '#FFF',
+    },
+    label: {
+      fontSize: 12,
+      color: '#FFF',
+      marginLeft: 8,
     },
   }),
 };

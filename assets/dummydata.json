@@ -1,24 +1,36 @@
 {
   "items": [
-	{
-	  "id": 1,
-	  "title": "Book"
-	},
-	{
-	  "id": 2,
-	  "title": "Car"
-	},
-	{
-	  "id": 3,
-	  "title": "Cat"
-	},
-	{
-	  "id": 4,
-	  "title": "Toy"
-	},
-	{
-	  "id": 5,
-	  "title": "Toy"
-	}
+    {
+      "id": 1,
+      "title": "Book"
+    },
+    {
+      "id": 2,
+      "title": "Car"
+    },
+    {
+      "id": 3,
+      "title": "Cat"
+    },
+    {
+      "id": 4,
+      "title": "Toy"
+    },
+    {
+      "id": 5,
+      "title": "Toy"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Things"
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "name": "Norway"
+    }
   ]
 }

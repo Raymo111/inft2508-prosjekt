@@ -1,5 +1,5 @@
-import { Image, Pressable, Text } from 'react-native';
-import { Styles } from './Styles';
+import {Image, Pressable, Text} from 'react-native';
+import {Styles} from './Styles';
 
 const ItemCard = (props: {
   imgURL: string;
@@ -22,10 +22,11 @@ const ItemCard = (props: {
     );
   };
   return (
-      <Pressable style={Styles.card.container} onPress={handlePress}>
-        <Image source={{uri: props.imgURL}} style={Styles.card.image} height={200} width={props.height / props.width * 200} />
-        <Text style={Styles.card.title}>{props.title}</Text>
-      </Pressable>
+    <Pressable style={Styles.card.card} onPress={handlePress}>
+      <Image source={{uri: props.imgURL}} style={Styles.card.image} height={200}
+             width={props.height / props.width * 200}/>
+      <Text style={Styles.card.title}>{props.title}</Text>
+    </Pressable>
   );
 };
 
