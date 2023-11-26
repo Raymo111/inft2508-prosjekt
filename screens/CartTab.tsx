@@ -1,31 +1,21 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CartScreen from './Cart';
 import React from 'react';
-import SettingsScreen from './Settings';
+import {Image, SafeAreaView, ScrollView, Text} from "react-native";
+import {Styles} from "../components/Styles";
+import {H1, H3} from "../components/Components";
 
-const CartStack = createNativeStackNavigator();
-
-const SettingsTabScreen = () => {
+const CartTabScreen = ({route}: { route: any }) => {
+  const {img, title, date, source, text} = route.params;
   return (
-    <CartStack.Navigator
-      initialRouteName="News"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#222',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          color: 'white',
-        },
-      }}>
-      <CartStack.Screen
-        name="News"
-        component={SettingsScreen}
-      />
-      <CartStack.Screen name="NewsStory" component={CartScreen} />
-    </CartStack.Navigator>
+    <SafeAreaView style={Styles.screen.container}>
+      <ScrollView style={Styles.page.container}>
+        <Image source={img}/>
+        <H1>{title}</H1>
+        <H3>{date}</H3>
+        <H3>{source}</H3>
+        <Text>{text}</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-export default SettingsTabScreen;
+export default CartTabScreen;
