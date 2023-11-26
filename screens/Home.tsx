@@ -97,12 +97,9 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
   };
 
   const showItemHandler = (
-    img: string,
-    title: string | null,
-    width: number,
-    height: number,
+    id: number,
   ) => {
-    navigation.navigate('Result', {img, title, width, height});
+    navigation.navigate('Item', {id});
   };
 
   return (
@@ -129,6 +126,7 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
                 searchedItems.map(item => (
                   <ItemCard
                     key={item.id}
+                    id={item.id}
                     imgURL={item.images ? item.images[0].url : endpoint + 'item-placeholder.png'}
                     title={item.title}
                     width={item.images ? item.images[0].width : 200}

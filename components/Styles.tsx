@@ -23,9 +23,35 @@ export const Styles = {
       fontSize: 18,
       color: '#FFF',
     },
+    h2: {
+      fontSize: 16,
+      color: '#FFF',
+    },
     h3: {
       fontSize: 12,
       color: '#AAA',
+    },
+    center: {
+      textAlign: 'center',
+      marginLeft: 100,
+      marginRight: 100,
+      marginBottom: 15,
+    },
+    pinTopLeft: {
+      position: 'absolute',
+      top: 12,
+      left: 12,
+    },
+    pinTopRight: {
+      position: 'absolute',
+      top: 12,
+      right: 12,
+    }
+  }),
+  grid: StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
     },
   }),
   search: StyleSheet.create({

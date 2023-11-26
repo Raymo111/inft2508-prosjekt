@@ -2,24 +2,15 @@ import {Image, Pressable, Text} from 'react-native';
 import {Styles} from './Styles';
 
 const ItemCard = (props: {
+  id: number;
   imgURL: string;
   title: string | null;
   width: number;
   height: number;
-  showItem: (
-    img: string,
-    title: string | null,
-    width: number,
-    height: number,
-  ) => void;
+  showItem: (id: number) => void;
 }) => {
   const handlePress = () => {
-    props.showItem(
-      props.imgURL,
-      props.title,
-      props.width,
-      props.height,
-    );
+    props.showItem(props.id);
   };
   return (
     <Pressable style={Styles.card.card} onPress={handlePress}>

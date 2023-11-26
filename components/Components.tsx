@@ -4,7 +4,7 @@ import React from 'react';
 import CheckBox from '@react-native-community/checkbox';
 
 export class Item {
-  id: number | null = null;
+  id: number = 0;
   title: string | null = null;
   description: string | null = null;
   price: number | null = null;
@@ -36,8 +36,16 @@ export const SectionHeading = (props: { children: any }) => {
   return <View style={Styles.section.heading}>{props.children}</View>;
 };
 
+export const Grid = (props: { children: any }) => {
+  return <View style={Styles.grid.container}>{props.children}</View>;
+}
+
 export const H1 = (props: { children: any }) => {
   return <Text style={Styles.page.h1}>{props.children}</Text>;
+};
+
+export const H2 = (props: { children: any }) => {
+  return <Text style={Styles.page.h2}>{props.children}</Text>;
 };
 
 export const H3 = (props: { children: any }) => {

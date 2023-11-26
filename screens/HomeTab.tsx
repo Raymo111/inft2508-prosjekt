@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './Home';
 import FiltersScreen from './Filters';
-import NewsStoryScreen from './Cart';
+import ItemScreen from './Item';
 import React from 'react';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {Pressable} from "react-native";
@@ -34,7 +34,7 @@ const HomeTabScreen = ({navigation}: { navigation: any }) => {
         })}
       />
       <HomeStack.Screen name="Filters" component={FiltersScreen}/>
-      <HomeStack.Screen name="NewsStory" component={NewsStoryScreen}/>
+      <HomeStack.Screen name="Item" component={ItemScreen}/>
     </HomeStack.Navigator>
   );
 };
