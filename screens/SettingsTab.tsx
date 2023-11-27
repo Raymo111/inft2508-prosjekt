@@ -74,7 +74,7 @@ const SettingsTabScreen = ({navigation}: { navigation: any }) => {
         {/*  Lottery news */}
         <Section>
           <SectionHeading>
-            <H1>Lottery News</H1>
+            <H1>Settings</H1>
           </SectionHeading>
           <View style={Styles.section.container}>
           </View>

@@ -11,10 +11,6 @@ import {useFocusEffect} from "@react-navigation/native";
 const BookmarksStack = createNativeStackNavigator();
 
 const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
-  const images = {
-    resultPlaceholder: require('../assets/item-placeholder.png'),
-  };
-
   // Initial state
   const [items, setItems] = useState<Item[]>([]);
   const [bookmarks, setBookmarks] = useState<Item[]>([]);
@@ -54,18 +50,18 @@ const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
         <Section>
           <SectionHeading>
             <H1>Bookmarks</H1>
-            {bookmarks.length > 0 ? (
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                {bookmarks.map((item: Item, index: number) => (
-                  <Pressable key={index} onPress={() => navigation.navigate('Item', {id: item.id})}>
-                    <ItemCard item={item} showItem={showItemHandler}/>
-                  </Pressable>
-                ))}
-              </ScrollView>
-            ) : (
-              <H3>No bookmarks</H3>
-            )}
           </SectionHeading>
+          {bookmarks.length > 0 ? (
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              {bookmarks.map((item: Item, index: number) => (
+                <Pressable key={index} onPress={() => navigation.navigate('Item', {id: item.id})}>
+                  <ItemCard item={item} showItem={showItemHandler}/>
+                </Pressable>
+              ))}
+            </ScrollView>
+          ) : (
+            <H3>No bookmarks</H3>
+          )}
         </Section>
       </ScrollView>
     </SafeAreaView>

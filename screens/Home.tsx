@@ -34,14 +34,7 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
     fetch(endpoint + 'data.json').then(response => {
       response.json().then(res => {
         setData(res);
-
-        // Add image to items
-        setItems(res.items.map((item: Item) => {
-          if (item.images && item.images.length > 0) {
-            item.images[0].url = endpoint + 'img/' + item.id + '/1.jpg';
-          }
-          return item;
-        }));
+        setItems(res.items);
       });
     });
   }, []);
