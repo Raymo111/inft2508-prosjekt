@@ -52,7 +52,12 @@ export const Styles = {
     container: {
       flexDirection: 'row',
       flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      margin: 10,
     },
+    image: {
+      margin: 10,
+    }
   }),
   search: StyleSheet.create({
     container: {

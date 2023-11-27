@@ -17,13 +17,13 @@ const Inft2508App = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => {
             let iconName;
-            if (route.name === 'HomeTab') {
+            if (route.name === 'Thumbnail') {
               iconName = 'grid-view';
-            } else if (route.name === 'BookmarksTab') {
+            } else if (route.name === 'Bookmarks') {
               iconName = 'favorite';
-            } else if (route.name === 'SettingsTab') {
+            } else if (route.name === 'Settings') {
               iconName = 'settings';
-            } else if (route.name === 'CartTab') {
+            } else if (route.name === 'Cart') {
                 iconName = 'shopping-cart';
             } else {
               iconName = 'help';
@@ -42,10 +42,10 @@ const Inft2508App = () => {
             backgroundColor: '#222',
           },
         })}>
-        <Tab.Screen name="HomeTab" component={HomeTabScreen} />
-        <Tab.Screen name="BookmarksTab" component={BookmarksTabScreen} />
-        <Tab.Screen name="SettingsTab" component={SettingsTabScreen} />
-        <Tab.Screen name="CartTab" component={CartTabScreen} />
+        <Tab.Screen name="Thumbnail" component={HomeTabScreen} />
+        <Tab.Screen name="Bookmarks" component={BookmarksTabScreen} />
+        <Tab.Screen name="Settings" component={SettingsTabScreen} />
+        <Tab.Screen name="Cart" component={CartTabScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -126,11 +126,7 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
                 searchedItems.map(item => (
                   <ItemCard
                     key={item.id}
-                    id={item.id}
-                    imgURL={item.images ? item.images[0].url : endpoint + 'item-placeholder.png'}
-                    title={item.title}
-                    width={item.images ? item.images[0].width : 200}
-                    height={item.images ? item.images[0].height : 200}
+                    item={item}
                     showItem={showItemHandler}
                   />
                 ))
