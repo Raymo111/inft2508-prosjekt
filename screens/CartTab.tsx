@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, H1, H2, H3, Item, Section, SectionHeading} from "../components/Components";
+import {Grid, H1, H2, H3, Item, Section, SectionHeading, Title} from "../components/Components";
 import {Pressable, SafeAreaView, ScrollView, ToastAndroid, View} from "react-native";
 import {Styles} from "../components/Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -9,12 +9,13 @@ import {useFocusEffect} from "@react-navigation/native";
 import I18n from "../localization/I18n";
 
 const CartTabScreen = ({navigation}: { navigation: any }) => {
-
   // Initial state
   const [items, setItems] = useState<Item[]>([]);
   const [cartString, setCartString] = useState<string>("");
   const [cart, setCart] = useState<Item[]>([]);
   const [reccItems, setReccItems] = useState<Item[]>([]);
+  const [lang, setLang] = useState('');
+  const [mode, setMode] = useState('');
 
   useEffect(() => {
     // Get items
@@ -33,6 +34,12 @@ const CartTabScreen = ({navigation}: { navigation: any }) => {
       } else if (value === null && cartString != "") {
         setCartString("");
       }
+    });
+    AsyncStorage.getItem('lang').then(value => {
+      if (value !== null && lang != value) setLang(value);
+    });
+    AsyncStorage.getItem('mode').then(value => {
+      if (value !== null && mode != value) setMode(value);
     });
   });
 
@@ -60,6 +67,50 @@ const CartTabScreen = ({navigation}: { navigation: any }) => {
     navigation.navigate('Item', {id});
   };
 
+  const resetCart = () => {
+    AsyncStorage.removeItem('cart').then(r => {
+      console.log(r);
+
+      // Toast message
+      ToastAndroid.showWithGravity(
+        I18n.t('Cart reset'),
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
+    });
+    setCart([]);
+  };
+
+  const checkout = () => {
+    AsyncStorage.removeItem('cart').then(r => {
+      console.log(r);
+
+      // Toast message
+      ToastAndroid.showWithGravity(
+        I18n.t('Thank you for your purchase!'),
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
+    });
+    setCart([]);
+
+    // Send to server via POST
+    // fetch(endpoint + 'order', {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     cart: cart.map(item => item.id),
+    //   }),
+    // }).then(response => {
+    //   response.json().then(res => {
+    //     console.log(res);
+    //   });
+    // });
+  };
+
   let shippingTime = '3-5 business days';
   return (
     <SafeAreaView style={Styles.s.screen.container}>
@@ -67,7 +118,7 @@ const CartTabScreen = ({navigation}: { navigation: any }) => {
       <ScrollView style={Styles.s.page.container}>
         {/* Cart */}
         <SectionHeading>
-          <H1>{I18n.t('Cart')}</H1>
+          <Title>{I18n.t('Cart')}</Title>
         </SectionHeading>
         {/* Show list of item titles with individual price and total sum */}
         {cart.length > 0 ? (
@@ -105,51 +156,11 @@ const CartTabScreen = ({navigation}: { navigation: any }) => {
             {/* Footer */}
             <Grid>
               {/* Reset cart */}
-              <Pressable onPress={() => {
-                AsyncStorage.removeItem('cart').then(r => {
-                  console.log(r);
-
-                  // Toast message
-                  ToastAndroid.showWithGravity(
-                    I18n.t('Cart reset'),
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER
-                  );
-                });
-                setCart([]);
-              }} style={Styles.s.button.container}>
+              <Pressable onPress={resetCart} style={Styles.s.button.container}>
                 <H1>{I18n.t('Reset cart')}</H1>
               </Pressable>
               {/* Checkout */}
-              <Pressable onPress={() => {
-                AsyncStorage.removeItem('cart').then(r => {
-                  console.log(r);
-
-                  // Toast message
-                  ToastAndroid.showWithGravity(
-                    I18n.t('Thank you for your purchase!'),
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER
-                  );
-                });
-                setCart([]);
-
-                // Send to server via POST
-                // fetch(endpoint + 'order', {
-                //   method: 'POST',
-                //   headers: {
-                //     Accept: 'application/json',
-                //     'Content-Type': 'application/json',
-                //   },
-                //   body: JSON.stringify({
-                //     cart: cart.map(item => item.id),
-                //   }),
-                // }).then(response => {
-                //   response.json().then(res => {
-                //     console.log(res);
-                //   });
-                // });
-              }} style={Styles.s.button.container}>
+              <Pressable onPress={checkout} style={Styles.s.button.container}>
                 <H1>{I18n.t('Confirm order')}</H1>
               </Pressable>
             </Grid>

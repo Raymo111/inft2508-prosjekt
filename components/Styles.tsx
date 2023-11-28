@@ -20,6 +20,11 @@ export const StylesDark = {
       color: '#FFF',
       flex: 1,
     },
+    title: {
+      fontSize: 16,
+      color: '#FFF',
+      fontWeight: 'bold',
+    },
     h1: {
       fontSize: 18,
       color: '#FFF',
@@ -194,6 +199,11 @@ export const StylesLight = {
       padding: 12,
       color: '#000',
       flex: 1,
+    },
+    title: {
+      fontSize: 16,
+      color: '#000',
+      fontWeight: 'bold',
     },
     h1: {
       fontSize: 18,

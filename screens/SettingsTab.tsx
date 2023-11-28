@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Appearance, SafeAreaView, ScrollView} from "react-native";
 import {Styles, StylesDark, StylesLight} from "../components/Styles";
-import {H1, H3, Section, SectionHeading} from "../components/Components";
+import {H1, H3, Section, SectionHeading, Title} from "../components/Components";
 import {Picker} from '@react-native-picker/picker';
 import I18n, {systemLocale} from "../localization/I18n";
 import {Dropdown} from "../components/Components";
@@ -82,10 +82,10 @@ const SettingsTabScreen = () => {
       {/* Scrollable page  */}
       <ScrollView style={Styles.s.page.container}>
         {/* Settings */}
+        <SectionHeading>
+          <Title>{I18n.t('Settings')}</Title>
+        </SectionHeading>
         <Section>
-          <SectionHeading>
-            <H1>{I18n.t('Settings')}</H1>
-          </SectionHeading>
           {/* Language */}
           <H1>{I18n.t('Language')}</H1>
           <H3>{I18n.t('Note:')} {I18n.t('Restart the app to apply changes')}</H3>

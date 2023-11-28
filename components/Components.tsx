@@ -34,6 +34,10 @@ export const Grid = (props: { children: any }) => {
   return <View style={Styles.s.grid.container}>{props.children}</View>;
 }
 
+export const Title = (props: { children: any }) => {
+  return <Text style={Styles.s.page.title}>{props.children}</Text>;
+};
+
 export const H1 = (props: { children: any }) => {
   return <Text style={Styles.s.page.h1}>{props.children}</Text>;
 };

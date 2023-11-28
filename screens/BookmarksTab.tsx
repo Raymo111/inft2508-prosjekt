@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {H1, H3, Item, Section, SectionHeading} from "../components/Components";
+import {H1, H3, Item, Section, SectionHeading, Title} from "../components/Components";
 import {Pressable, SafeAreaView, ScrollView} from "react-native";
 import {Styles} from "../components/Styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -45,10 +45,10 @@ const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
       {/* Scrollable page  */}
       <ScrollView style={Styles.s.page.container}>
         {/* Bookmarks */}
+        <SectionHeading>
+          <Title>{I18n.t('Bookmarks')}</Title>
+        </SectionHeading>
         <Section>
-          <SectionHeading>
-            <H1>{I18n.t('Bookmarks')}</H1>
-          </SectionHeading>
           {bookmarks.length > 0 ? (
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               {bookmarks.map((item: Item, index: number) => (

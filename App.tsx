@@ -7,6 +7,7 @@ import BookmarksTabScreen from './screens/BookmarksTab';
 import SettingsTabScreen from './screens/SettingsTab';
 import CartTabScreen from './screens/CartTab';
 import I18n from "./localization/I18n";
+import {Styles} from "./components/Styles";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,14 +34,14 @@ const Inft2508App = () => {
               <MaterialIcons
                 name={iconName}
                 size={28}
-                color={focused ? 'white' : 'gray'}
+                color={focused ? Styles.s.colors.secondary : 'gray'}
               />
             );
           },
-          tabBarActiveTintColor: 'white',
+          tabBarActiveTintColor: Styles.s.colors.secondary,
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
-            backgroundColor: '#222',
+            backgroundColor: Styles.s.colors.primary,
           },
         })}>
         <Tab.Screen name="Thumbnail" component={HomeTabScreen} options={{title: I18n.t('Thumbnail')}} />

@@ -27,8 +27,8 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
   const [items, setItems] = useState<Item[]>(data.items);
   const [searchedItems, setSearchedItems] = useState<Item[]>([]);
   const [filters, setFilters] = useState<string>("");
-  const [lang, setLang] = useState('en');
-  const [mode, setMode] = useState('dark');
+  const [lang, setLang] = useState('');
+  const [mode, setMode] = useState('');
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -48,14 +48,10 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
         }
       });
       AsyncStorage.getItem('lang').then(value => {
-        if (value !== null && lang != value) {
-          setLang(value);
-        }
+        if (value !== null && lang != value) setLang(value);
       });
       AsyncStorage.getItem('mode').then(value => {
-        if (value !== null && mode != value) {
-          setMode(value);
-        }
+        if (value !== null && mode != value) setMode(value);
       });
     } catch (e) {
       console.log('Error');
