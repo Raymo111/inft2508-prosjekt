@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {H1, H3, Item, Section, SectionHeading} from "../components/Components";
 import {Pressable, SafeAreaView, ScrollView} from "react-native";
 import {Styles} from "../components/Styles";
@@ -7,8 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {endpoint} from "./Home";
 import ItemCard from "../components/ItemCard";
 import {useFocusEffect} from "@react-navigation/native";
-
-const BookmarksStack = createNativeStackNavigator();
+import I18n from "../localization/I18n";
 
 const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
   // Initial state
@@ -43,13 +41,13 @@ const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
   };
 
   return (
-    <SafeAreaView style={Styles.screen.container}>
+    <SafeAreaView style={Styles.s.screen.container}>
       {/* Scrollable page  */}
-      <ScrollView style={Styles.page.container}>
+      <ScrollView style={Styles.s.page.container}>
         {/* Bookmarks */}
         <Section>
           <SectionHeading>
-            <H1>Bookmarks</H1>
+            <H1>{I18n.t('Bookmarks')}</H1>
           </SectionHeading>
           {bookmarks.length > 0 ? (
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -60,7 +58,7 @@ const BookmarksTabScreen = ({navigation}: { navigation: any }) => {
               ))}
             </ScrollView>
           ) : (
-            <H3>No bookmarks</H3>
+            <H3>{I18n.t('No bookmarks')}</H3>
           )}
         </Section>
       </ScrollView>

@@ -17,11 +17,11 @@ const ItemCard = (props: {
   }
 
   return (
-    <Pressable style={Styles.card.card} onPress={handlePress}>
+    <Pressable style={Styles.s.card.card} onPress={handlePress}>
       <Image source={{uri: props.item.images ? props.item.images[0].url : endpoint + 'item-placeholder.png'}}
-             style={Styles.card.image} height={200}
+             style={Styles.s.card.image} height={200}
              width={width / height * 200}/>
-      <Text style={Styles.card.title}>{props.item.title}</Text>
+      <Text style={Styles.s.card.title}>{props.item.title}</Text>
     </Pressable>
   );
 };

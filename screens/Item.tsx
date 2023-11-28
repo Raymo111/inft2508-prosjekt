@@ -6,6 +6,7 @@ import {endpoint} from "./Home";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import ImageView from "react-native-image-viewing";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import I18n from "../localization/I18n";
 
 const ItemScreen = ({route, navigation}: { route: any, navigation: any }) => {
   const {id} = route.params;
@@ -45,7 +46,7 @@ const ItemScreen = ({route, navigation}: { route: any, navigation: any }) => {
   // Set title
   useEffect(() => {
     navigation.setOptions({
-      title: item?.title ?? 'Item',
+      title: item?.title ?? I18n.t('Item'),
     });
   }, [item, navigation]);
 
@@ -119,13 +120,13 @@ const ItemScreen = ({route, navigation}: { route: any, navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={Styles.screen.container}><ScrollView style={Styles.page.container}>
+    <SafeAreaView style={Styles.s.screen.container}><ScrollView style={Styles.s.page.container}>
       {item ? <View>
-        <Pressable onPress={() => bookmark(item)} style={Styles.page.pinTopLeft}>
+        <Pressable onPress={() => bookmark(item)} style={Styles.s.page.pinTopLeft}>
           {bookmarked ? <MaterialIcons name={'favorite'} size={30} color={'red'}/> :
             <MaterialIcons name={'favorite-border'} size={30} color={'red'}/>}
         </Pressable>
-        <Pressable onPress={() => addToCart(item)} style={Styles.page.pinTopRight}>
+        <Pressable onPress={() => addToCart(item)} style={Styles.s.page.pinTopRight}>
           {inCart ? <MaterialIcons name={'remove-shopping-cart'} size={30} color={'lightblue'}/> :
             <MaterialIcons name={'add-shopping-cart'} size={30} color={'lightblue'}/>}
         </Pressable>
@@ -136,22 +137,22 @@ const ItemScreen = ({route, navigation}: { route: any, navigation: any }) => {
 				visible={previewVisible}
 				onRequestClose={() => setIsPreviewVisible(false)}
 			/>}
-        <View style={Styles.page.center}>
+        <View style={Styles.s.page.center}>
           <Text>{item.description}</Text>
-          <H2>Price: {item.price}</H2>
-          <H2>Location: {item.location}</H2>
-          <H2>Contact info: {item.contact}</H2>
-          <H3>Category: {item.category}</H3>
+          <H2>{I18n.t('Price:')} {item.price}</H2>
+          <H2>{I18n.t('Location:')} {item.location ?? I18n.t('None')}</H2>
+          <H2>{I18n.t('Contact info:')} {item.contact ?? I18n.t('None')}</H2>
+          <H3>{I18n.t('Category:')} {item.category ? I18n.t(item.category) : I18n.t('None')}</H3>
         </View>
         {item.images ? <Grid>
           {item.images.map((_, index) => (
             <Pressable key={index} onPress={() => popimage(index)}>
               <Image source={{uri: endpoint + 'img/' + item.id + '/' + (index + 1) + '.jpg'}}
-                     style={Styles.grid.image} width={200} height={200}/>
+                     style={Styles.s.grid.image} width={200} height={200}/>
             </Pressable>
           ))}
-        </Grid> : <H3>No images - Contact seller</H3>}
-      </View> : <H3>Loading...</H3>}
+        </Grid> : <H3>{I18n.t('No images - Contact seller')}</H3>}
+      </View> : <H3>{I18n.t('Loading...')}</H3>}
     </ScrollView>
     </SafeAreaView>
   );

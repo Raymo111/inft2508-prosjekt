@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Styles} from '../components/Styles';
 import {endpoint} from "./Home";
 import {ChecklistEntry, H3} from "../components/Components";
+import I18n from "../localization/I18n";
 
 // @ts-ignore
 const FiltersScreen = () => {
@@ -52,14 +53,14 @@ const FiltersScreen = () => {
   };
 
   return (
-    <SafeAreaView style={Styles.screen.container}>
-      <ScrollView style={Styles.page.container}>
+    <SafeAreaView style={Styles.s.screen.container}>
+      <ScrollView style={Styles.s.page.container}>
         {Object.keys(filters).length > 0 ? (
           Object.entries(filters).map(([k, v], index) => (
-            <ChecklistEntry key={index} value={v} onValueChange={(value) => handleSelChg({title: k, value})} title={k}/>
+            <ChecklistEntry key={index} value={v} onValueChange={(value) => handleSelChg({title: k, value})} title={I18n.t(k)}/>
           ))
         ) : (
-          <H3>No filters found</H3>
+          <H3>{I18n.t('No filters found')}</H3>
         )}
       </ScrollView>
     </SafeAreaView>

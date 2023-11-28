@@ -5,6 +5,7 @@ import ItemScreen from './Item';
 import React from 'react';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {Pressable} from "react-native";
+import I18n from "../localization/I18n";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -14,7 +15,7 @@ const HomeTabScreen = ({navigation}: { navigation: any }) => {
   };
   return (
     <HomeStack.Navigator
-      initialRouteName="Home"
+      initialRouteName='Home'
       screenOptions={{
         headerStyle: {
           backgroundColor: '#222',
@@ -26,15 +27,19 @@ const HomeTabScreen = ({navigation}: { navigation: any }) => {
         },
       }}>
       <HomeStack.Screen
-        name="Home"
+        name='Home'
         component={HomeScreen}
         options={() => ({
           // eslint-disable-next-line react/no-unstable-nested-components
           headerRight: () => <Pressable onPress={handleFiltersPress}><MaterialIcons name="menu" size={24} color="grey"/></Pressable>,
+          headerTitle: I18n.t('Home'),
         })}
       />
-      <HomeStack.Screen name="Filters" component={FiltersScreen}/>
-      <HomeStack.Screen name="Item" component={ItemScreen}/>
+      <HomeStack.Screen name='Filters' component={FiltersScreen}
+      options={() => ({
+        headerTitle: I18n.t('Filters'),
+      })}/>
+      <HomeStack.Screen name='Item' component={ItemScreen}/>
     </HomeStack.Navigator>
   );
 };

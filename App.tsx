@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import HomeTabScreen from './screens/HomeTab';
@@ -6,6 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import BookmarksTabScreen from './screens/BookmarksTab';
 import SettingsTabScreen from './screens/SettingsTab';
 import CartTabScreen from './screens/CartTab';
+import I18n from "./localization/I18n";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,10 +43,10 @@ const Inft2508App = () => {
             backgroundColor: '#222',
           },
         })}>
-        <Tab.Screen name="Thumbnail" component={HomeTabScreen} />
-        <Tab.Screen name="Bookmarks" component={BookmarksTabScreen} />
-        <Tab.Screen name="Settings" component={SettingsTabScreen} />
-        <Tab.Screen name="Cart" component={CartTabScreen} />
+        <Tab.Screen name="Thumbnail" component={HomeTabScreen} options={{title: I18n.t('Thumbnail')}} />
+        <Tab.Screen name="Bookmarks" component={BookmarksTabScreen} options={{title: I18n.t('Bookmarks')}} />
+        <Tab.Screen name="Settings" component={SettingsTabScreen} options={{title: I18n.t('Settings')}} />
+        <Tab.Screen name="Cart" component={CartTabScreen} options={{title: I18n.t('Cart')}} />
       </Tab.Navigator>
     </NavigationContainer>
   );

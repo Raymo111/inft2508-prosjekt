@@ -16,6 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ItemCard from '../components/ItemCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from "@react-navigation/native";
+import I18n from "../localization/I18n";
 
 export const endpoint = 'https://cloud.raymond.li/proj/';
 
@@ -96,25 +97,25 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
   };
 
   return (
-    <SafeAreaView style={Styles.screen.container}>
-      {/* Page  */}
-      <View style={Styles.page.container}>
+    <SafeAreaView style={Styles.s.screen.container}>
+      {/* Page */}
+      <View style={Styles.s.page.container}>
         {/* Search bar */}
-        <View style={Styles.search.container}>
+        <View style={Styles.s.search.container}>
           <TextInput
-            style={Styles.search.input}
-            placeholder="Search"
+            style={Styles.s.search.input}
+            placeholder={I18n.t('Search')}
             placeholderTextColor={'#888'}
             onChangeText={searchChangedHandler}
           />
-          <Pressable style={Styles.search.button}>
+          <Pressable style={Styles.s.search.button}>
             <MaterialIcons name="search" size={24} color="grey"/>
           </Pressable>
         </View>
         {/* Items */}
         <Section>
           <ScrollView>
-            <View style={Styles.card.container}>
+            <View style={Styles.s.card.container}>
               {searchedItems.length > 0 ? (
                 searchedItems.map(item => (
                   <ItemCard
@@ -124,7 +125,7 @@ const HomeScreen = ({navigation}: { navigation: any }) => {
                   />
                 ))
               ) : (
-                <H3>No results found</H3>
+                <H3>{I18n.t('No results found')}</H3>
               )}
             </View>
           </ScrollView>
