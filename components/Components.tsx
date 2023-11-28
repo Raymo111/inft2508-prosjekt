@@ -7,7 +7,7 @@ export class Item {
   id: number = 0;
   title: string | null = null;
   description: string | null = null;
-  price: number | null = null;
+  price: number = 0;
   location: string | null = null;
   contact: string | null = null;
   category: string | null = null;

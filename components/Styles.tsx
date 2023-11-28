@@ -46,7 +46,7 @@ export const Styles = {
       position: 'absolute',
       top: 12,
       right: 12,
-    }
+    },
   }),
   grid: StyleSheet.create({
     container: {
@@ -129,6 +129,22 @@ export const Styles = {
       flexDirection: 'row',
       alignItems: 'center',
     },
+    container2: {
+      marginTop: 8,
+      marginBottom: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    containerHead: {
+      marginBottom: 16,
+      paddingBottom: 8,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderBottomColor: '#FFF',
+      borderBottomWidth: 1,
+    },
     checkbox: {
       color: '#FFF',
     },
@@ -138,5 +154,13 @@ export const Styles = {
       marginLeft: 8,
     },
   }),
+  button: StyleSheet.create({
+    container: {
+      marginTop: 16,
+      marginBottom: 16,
+      padding: 12,
+      backgroundColor: '#222',
+      borderRadius: 5,
+    },
+  })
 };
-// TODO: style all the new pages
